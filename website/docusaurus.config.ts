@@ -55,8 +55,8 @@ if (process.env.VERCEL_URL) {
 }
 
 const config: Config = {
-  title: 'Redocusaurus',
-  tagline: 'OpenAPI solution for Docusaurus docs with Redoc',
+  title: 'Sonity Docs',
+  tagline: 'Hi there! At Sonity we are building a state of the art LinkedIn automation tool. This documentation will help you to understand how Sonity works',
   customFields: {
     meta: {
       description: 'Integrate Redoc easily into your Docusaurus Site',
@@ -64,6 +64,8 @@ const config: Config = {
   },
   url: process.env.DEPLOY_PRIME_URL || 'http://localhost:5000', // Your website URL
   baseUrl: process.env.DEPLOY_BASE_URL || '/', // Base URL for your project */
+  organizationName: 'sonity', // Usually your GitHub org/user name.
+  projectName: 'sonity-documentation', // Usually your repo name.
   favicon: 'img/favicon.ico',
   presets: [
     [
@@ -83,7 +85,11 @@ const config: Config = {
   ],
   themeConfig: {
     navbar: {
-      title: 'Redocusaurus',
+      title: 'Sonity Docs',
+      logo: {
+        alt: 'Sonity Docs',
+        src: 'img/logo.png',
+      },
       items: [
         {
           label: 'Docs',
@@ -91,7 +97,7 @@ const config: Config = {
           to: '/docs',
         },
         {
-          label: 'Examples',
+          label: 'API',
           position: 'left',
           items: [
             {
@@ -158,41 +164,34 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'NPM Modules',
+          title: 'Site',
           items: [
             {
-              label: 'Redocusaurus',
-              href: 'https://www.npmjs.com/package/redocusaurus/',
+              label: 'Sonity',
+              href: 'https://sonity.info',
             },
-            {
-              label: 'Docusaurus Theme Redoc',
-              href: 'https://www.npmjs.com/package/docusaurus-theme-redoc/',
-            },
-            {
-              label: 'Docusaurus Plugin Redoc',
-              href: 'https://www.npmjs.com/package/docusaurus-plugin-redoc/',
-            },
+            
           ],
         },
         {
-          title: 'More',
+          title: 'Microservices',
           items: [
             {
-              label: 'Github',
+              label: 'Portal Example',
               href: 'https://github.com/rohit-gohri/redocusaurus/',
             },
             {
-              label: 'Blog Post',
+              label: 'Sonity Gateway',
               href: 'https://rohit.page/blog/projects/openapi-for-docusaurus/',
             },
             {
-              label: 'Twitter Discussion',
+              label: 'Selenium API',
               href: 'https://twitter.com/rohit_gohri/status/1351589213565644801',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} <a href="https://rohit.page" target="_blank" rel="noopener noreferrer">Rohit Gohri</a>. Built with <a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer">Docusaurus</a>`,
+      copyright: `Copyright © ${new Date().getFullYear()} <a href="https://sonity.info" target="_blank" rel="noopener noreferrer">Sonity</a>. Built with <a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer">Docusaurus</a>`,
     },
   } satisfies Preset.ThemeConfig,
 };
