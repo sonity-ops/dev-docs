@@ -39,5 +39,13 @@
   "editor.tabSize": 2,
   "editor.rulers": [80, 120],
   "typescript.tsdk": "node_modules/typescript/lib",
-  "cSpell.words": ["Redoc", "redocusaurus"]
+  "cSpell.words": [
+    "Redoc",
+    "redocusaurus"
+  ],
+  "[javascript][javascriptreact][typescript][typescriptreact]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit"
+    }
+  }
 }

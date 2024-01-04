@@ -1,0 +1,8 @@
+{
+    "label": "Guides",
+    "position": 3,
+    "link": {
+      "type": "generated-index",
+      "description": "A list of guides to help quickly use the gateway"
+    }
+  }
