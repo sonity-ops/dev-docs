@@ -2,37 +2,38 @@ import React from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import clsx from 'clsx';
 import styles from './styles.module.css';
 
 const sections = [
   {
-    title: <>🌚 Dark Mode Support</>,
-    description: (
-      <>Inbuilt support for Docusaurus Classic Theme&apos;s Dark Mode!</>
-    ),
-  },
-  {
-    title: <>🧩 Customizable</>,
+    title: 'Easy to Use',
+    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Pass in your custom theme colors or options and it will be merged. All
-        components can be swizzled to suit your needs (with Typescript support)
+        Docusaurus was designed from the ground up to be easily installed and
+        used to get your website up and running quickly.
       </>
     ),
   },
   {
-    title: <>📑 Schema Definitions</>,
+    title: 'Focus on What Matters',
+    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
-      <>Use individual schema definitions directly in your MDX docs</>
+      <>
+        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
+        ahead and move your docs into the <code>docs</code> directory.
+      </>
     ),
   },
   {
-    title: <>⚡️ Blazing Fast</>,
+    title: 'Build By Devs for Devs',
+    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Support for
-        <a href="/docs/guides/build-time-rendering"> Build Time Rendering!</a>
+        Extend or customize your website layout by reusing React. Docusaurus can
+        be extended while reusing the same header and footer.
       </>
     ),
   },
@@ -58,22 +59,22 @@ function Section({ title, description, link }) {
 }
 
 function Docs() {
+  const {siteConfig} = useDocusaurusContext();
   return (
     <Layout title="Redocusaurus" description="OpenAPI documentation solution">
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
-        <div className="container">
-          <h1 className="hero__title">Redocusaurus</h1>
-          <p>OpenAPI solution for Docusaurus docs using Redoc</p>
-          <span>
-            <iframe
-              src="https://ghbtns.com/github-btn.html?user=rohit-gohri&amp;repo=redocusaurus&amp;type=star&amp;count=true&amp;size=large"
-              width={160}
-              height={30}
-              title="GitHub Stars"
-            />
-          </span>
+      <div className="container">
+        <h1 className="hero__title">{siteConfig.title}</h1>
+        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <div className={styles.buttons}>
+          <Link
+            className="button button--secondary button--lg"
+            to="/docs/">
+            Get Started 🚀
+          </Link>
         </div>
-      </header>
+      </div>
+    </header>
       <main>
         {sections && sections.length > 0 && (
           <section className={styles.features}>
