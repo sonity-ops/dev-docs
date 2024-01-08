@@ -1,0 +1,501 @@
+openapi: 3.0.0
+servers:
+  - url: //petstore.swagger.io/v2
+    description: Default server
+  - url: //petstore.swagger.io/sandbox
+    description: Sandbox server
+info:
+  description: |
+
+    # Introduction
+    This is an API documention of the Selenium API microservice.
+    
+    The Selenium API micorservice is used to execute tasks on the LinkedIn platform by using the selenium library
+    
+    
+    # Authentication
+
+    You can authenticate to Selenium API via the following method:
+      
+    ### 1. API Key
+    
+    When you login you will be given a toke, simply pass it to **Authorization** heaeder 
+    
+    ```
+    Athorization: eyJhbGciOiJIUz...UcclPUqvpZQ
+    ```
+    
+
+    
+
+    <SecurityDefinitions />
+
+  version: 1.0.0
+  title: Selenium API
+tags:
+  - name: pet
+    description: Everything about your Pets
+  - name: store
+    description: Access to Petstore orders
+  - name: user
+    description: Operations about user
+  - name: pet_model
+    x-displayName: The Pet Model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/Pet" />
+  - name: store_model
+    x-displayName: The Order Model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/Order" exampleRef="#/components/examples/Order" showReadOnly={true} showWriteOnly={true} />
+x-tagGroups:
+  - name: General
+    tags:
+      - pet
+      - store
+  - name: User Management
+    tags:
+      - user
+  - name: Models
+    tags:
+      - pet_model
+      - store_model
+paths:
+  
+  /sign-in-and-attach-messenger:
+    post:
+      # tags:
+      #   - pet
+      summary: Spawn a driver
+      description: Creates and prepares  a driver for executing tasks
+      operationId: startDriver
+      responses:
+        '200':
+          description: Driver was started successfully
+        '500':
+          description: Failed. The server is not accessible
+      requestBody:
+        $ref: '#/components/requestBodies/Profile'
+  /enter-pin-code:
+    post:
+      summary: Enter verification pin code 
+      description: Enter verification pin code recieved either on your email, phone or verification app
+      responses:
+        '200':
+          description: Driver was started successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Driver updated successfully"
+        '500':
+          description: Verification failed
+      requestBody:
+        $ref: '#/components/requestBodies/Profile'
+  '/destroy/{sonity_profile_id}':
+    post:
+      summary: Destroy a driver
+      description: ''
+      parameters:
+        - name: sonity_profile_id
+          in: path
+          description: Sonity profile id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '405':
+          description: Invalid input
+      requestBody:
+        $ref: '#/components/requestBodies/Profile'
+        
+  '/clear-tasks/{sonity_profile_id}':
+    get:
+      summary: Clear driver tasks
+      description: ''
+      parameters:
+        - name: sonity_profile_id
+          in: path
+          description: Sonity profile id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DriverData'
+  '/refresh-tasks/{sonity_profile_id}':
+    get:
+      summary: Refreshes tasks on the webdriver and forces start of Control tasks if exists
+      description: ''
+      parameters:
+        - name: sonity_profile_id
+          in: path
+          description: Sonity profile id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: "Status of the operation"
+                    example: "success"
+                  message:
+                    type: string
+                    description: "Message of the operation"
+                    example: "Driver 213 was not found. So no tasks were refreshed"
+                  
+        
+  '/set-available/{sonity_profile_id}':
+    post:
+      summary: uploads an image
+      description: ''
+      parameters:
+        - name: sonity_profile_id
+          in: path
+          description: Sonity profile id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+      requestBody:
+        $ref: '#/components/requestBodies/Profile'
+  '/status/{sonity_profile_id}':
+    get:
+      summary: Get the status of a driver
+      description: ''
+      parameters:
+        - name: sonity_profile_id
+          in: path
+          description: Sonity profile id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DriverData'
+        
+  '/take-snapshot/{sonity_profile_id}':
+    post:
+      summary: uploads an image
+      description: ''
+      parameters:
+        - name: sonity_profile_id
+          in: path
+          description: Sonity profile id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                created_at: 
+                  type: string
+                  example: '2024-01-08T09:47:47.361Z'
+                img: 
+                  type: string
+                  example: 'iVBORw0KGgoAAAANSUhEUgAABDAAAAL'
+                  description: "The image string"
+  /statistics:
+    get:
+      summary: Get driver driver data
+      description: ''
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DriverData'
+  /run-routine:
+    post:
+      summary: Test a driver routine on the fly
+      description: ''
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DriverData'
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+      requestBody:
+        $ref: '#/components/requestBodies/RoutineData'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 65
+          description: "The unique identifier for the user."
+        email:
+          type: string
+          example: "takundam@sonity.net"
+          description: "The email address of the user."
+        user_status_id:
+          type: integer
+          example: 60
+          description: "The status identifier of the user."
+        linkedinId:
+          type: string  # Replace with actual type if available
+          description: "The LinkedIn ID of the user."
+        githubId:
+          type: string  # Replace with actual type if available
+          description: "The GitHub ID of the user."
+        twitterId:
+          type: string  # Replace with actual type if available
+          description: "The Twitter ID of the user."
+        isVerified:
+          type: boolean
+          example: true
+          description: "Indicates whether the user is verified or not."
+        verifyToken:
+          type: string
+          example: "df22351aedd293024637bf5efc988e"
+          description: "Token used for user verification."
+        verifyExpires:
+          type: string
+          format: date-time
+          example: "2022-03-08T00:00:00Z"
+          description: "Expiration date for the verification token."
+        verifyChanges:
+          type: object
+          description: "Changes made during user verification."
+      required:
+        - id
+        - email
+        - user_status_id
+        - isVerified
+        - verifyToken
+        - verifyExpires
+        - verifyChanges
+    Proxy:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "19"
+          description: "The unique identifier for the user."
+        type:
+          type: string  # Replace with actual type if available
+          description: "The type of user."
+        name:
+          type: string
+          example: "Bear Proxy"
+          description: "The name of the user."
+        description:
+          type: string  # Replace with actual type if available
+          description: "The description of the user."
+        host:
+          type: string
+          example: "51.161.50.166"
+          description: "The host of the user."
+        port:
+          type: string
+          example: "3128"
+          description: "The port of the user."
+        username:
+          type: string
+          example: "squiduser"
+          description: "The username of the user."
+        password:
+          type: string
+          example: "179fc19925"
+          description: "The password of the user."
+        created_at:
+          type: string
+          format: date-time
+          example: "1970-01-01T00:00:00.000Z"
+          description: "The timestamp when the user was created."
+        updated_at:
+          type: string
+          format: date-time
+          example: "1970-01-01T00:00:00.000Z"
+          description: "The timestamp when the user was last updated."
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+   
+    DriverData:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: "The unique identifier for the user."
+        user_id:
+          type: integer
+          description: "The user ID."
+        sonity_account_id:
+          type: string
+          description: "The Sonity account ID."
+        sonity_profile_id:
+          type: integer
+          description: "The Sonity profile ID."
+        status:
+          type: string
+          description: "The status of the user."
+        profile_name:
+          type: string
+          description: "The profile name of the user."
+        current_task:
+          type: object  # Replace with actual type if available
+          description: "The current task of the user."
+        tabs:
+          type: array
+          items:
+            type: string
+            description: "List of tabs associated with the user."
+        mainTab:
+          type: string
+          description: "The main tab of the user."
+        messengerTab:
+          type: string
+          description: "The messenger tab of the user."
+        hasRevokedThisSession:
+          type: boolean
+          description: "Indicates whether the user has revoked the session."
+        blacklisted_titles:
+          type: array
+          items:
+            type: string
+            description: "List of blacklisted titles for the user."
+        errorMsg:
+          type: object  # Replace with actual type if available
+          description: "Error message associated with the user."                        
+
+  requestBodies:
+    RoutineData:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              secret:
+                type: string
+                description: "The secret key for the routine."
+                example: "E7D23874"
+              sonity_profile_id:
+                type: integer
+                description: "The Sonity profile ID."
+                example: 213
+              module_path:
+                type: string
+                description: "The path to the routine module."
+                example: "../../routines/search/searchAndCollect.js"
+              clear_modules:
+                type: array
+                items:
+                  type: string
+                description: "List of paths to clear modules."
+                example: 
+                  - ../../routines/search/searchAndCollect.js
+                         
+              routine_signature:
+                type: string
+                description: "The signature of the routine."
+                example:  "driver, payload"
+              routine_is_async:
+                type: boolean
+                description: "Indicates whether the routine is asynchronous."
+                example: true
+              routine_args:
+                type: object
+                description: "Arguments for the routine."
+                example: 
+                  payload:
+                    url: https://www.linkedin.com/search/results/people/?keywords=graphic%20desciner&origin=SWITCH_SEARCH_VERTICAL&sid=2KP
+                    visitMax: 10
+                    add_to_list: false
+     
+            required:
+              - secret
+              - sonity_profile_id
+              - module_path
+              - clear_modules
+              - routine_signature
+              - routine_is_async
+              - routine_args
+    Profile:
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              email: 
+                type: string
+                description: Profile email address
+              password:
+                type: string
+                description: Profile password    
+              user:
+                $ref: '#/components/schemas/User'
+              proxies:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Proxy'
+              sonity_account_id:
+                type: integer
+                description: Sonity account id
+              sonity_profile_id:
+                type: string
+                description: Sonity profile id
+              contact_id:
+                type: string
+                description: Profile contact id
+      description: Profile object
+      required: true
+   
+  securitySchemes:
+    api_key:
+      description: >
+        For this sample, you can use the api key `special-key` to test the
+        authorization filters.
+      type: apiKey
+      name: api_key
+      in: header

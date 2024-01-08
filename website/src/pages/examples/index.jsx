@@ -44,7 +44,7 @@ const sections = [
   },
   {
     title: <>Using YAML Spec</>,
-    link: '/examples/using-single-yaml/',
+    link: '/examples/sonity-gateway/',
     description: (
       <>
         A build time rendered page (no loading indicator on refresh), made

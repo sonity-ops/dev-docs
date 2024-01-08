@@ -13,14 +13,13 @@ html[data-theme='dark'] .header-github-logo:before {
 }
 
 html[data-theme='dark'] .hero__subtitle,
-html[data-theme='dark'] .hero__title
+html[data-theme='dark'] .hero__subtitle
  {
    color: #e3e3e3
 }
 
 
 :root {
-  --ifm-color-primary: #28347e; /* Original color */
   --ifm-color-primary-light: #5263b9; /* Lighter version */
   --ifm-color-primary-dark: #1c2560; /* Darker version */
   --ifm-color-primary-lighter: #7686d5; /* Even lighter version */
@@ -28,7 +27,7 @@ html[data-theme='dark'] .hero__title
 }
 
 [data-theme='dark'] {
-  --ifm-color-primary: #28347e; /* Dark mode color (same as original) */
+
   --ifm-color-primary-light: #5263b9; /* Lighter version in dark mode (same as in light mode) */
   --ifm-color-primary-dark: #1c2560; /* Darker version in dark mode (same as in light mode) */
   --ifm-color-primary-lighter: #7686d5; /* Even lighter version in dark mode (same as in light mode) */

@@ -10,9 +10,29 @@ const redocusaurus: PresetEntry = [
     config: path.join(__dirname, 'redocly.yaml'),
     specs: [
       {
-        id: 'using-single-yaml',
-        spec: 'openapi/single-file/openapi.yaml',
-        route: '/examples/using-single-yaml/',
+        id: 'sonity-gateway',
+        spec: 'openapi/sonity-gateway/openapi.yaml',
+        route: '/examples/sonity-gateway/',
+      },
+      {
+        id: 'selenium-api',
+        spec: 'openapi/selenium-api/openapi.yaml',
+        route: '/examples/selenium-api/',
+      },
+      {
+        id: 'sonity-mq',
+        spec: 'openapi/sonity-mq/openapi.yaml',
+        route: '/examples/sonity-mq/',
+      },
+      {
+        id: 'sonity-webhooks',
+        spec: 'openapi/sonity-webhooks/openapi.yaml',
+        route: '/examples/sonity-webhooks/',
+      },
+      {
+        id: 'sonity-oracle',
+        spec: 'openapi/sonity-oracle/openapi.yaml',
+        route: '/examples/sonity-oracle/',
       },
       // {
       //   id: 'using-multi-file-yaml',
@@ -101,59 +121,71 @@ const config: Config = {
           position: 'left',
           items: [
             {
-              label: 'All',
-              to: '/examples',
+              label: 'Sonity Gateway',
+              to: '/examples/sonity-gateway/',
             },
             {
-              label: 'Using Single YAML',
-              to: '/examples/using-single-yaml/',
+              label: 'Selenium API',
+              to: '/examples/selenium-api/',
             },
             {
-              label: 'Using Remote URL',
-              to: '/examples/using-remote-url/',
+              label: 'Sonity MQ',
+              to: '/examples/sonity-mq/',
             },
             {
-              label: 'Using Multiple YAMLs',
-              to: '/examples/using-multi-file-yaml/',
+              label: 'Sonity Webhooks',
+              to: '/examples/sonity-webhooks/',
             },
             {
-              label: 'Using Swagger',
-              to: '/examples/using-swagger-json/',
+              label: 'Sonity Oracle',
+              to: '/examples/sonity-oracle/',
             },
-            {
-              label: 'Custom Page',
-              to: '/examples/custom-page/',
-            },
-            {
-              label: 'Custom Layout',
-              to: '/examples/custom-layout/',
-            },
-            {
-              label: 'Client Only',
-              to: '/examples/client-only/',
-            },
+            // {
+            //   label: 'Using Remote URL',
+            //   to: '/examples/using-remote-url/',
+            // },
+            // {
+            //   label: 'Using Multiple YAMLs',
+            //   to: '/examples/using-multi-file-yaml/',
+            // },
+            // {
+            //   label: 'Using Swagger',
+            //   to: '/examples/using-swagger-json/',
+            // },
+            // {
+            //   label: 'Custom Page',
+            //   to: '/examples/custom-page/',
+            // },
+            // {
+            //   label: 'Custom Layout',
+            //   to: '/examples/custom-layout/',
+            // },
+            // {
+            //   label: 'Client Only',
+            //   to: '/examples/client-only/',
+            // },
           ],
         },
-        {
-          label: 'v1+',
-          position: 'right',
-          items: [
-            {
-              label: 'v0',
-              href: 'https://redocusaurus-v0.vercel.app/',
-            },
-            {
-              label: 'v1+',
-              href: 'https://redocusaurus.vercel.app',
-            },
-          ],
-        },
-        {
-          href: 'https://github.com/rohit-gohri/redocusaurus',
-          position: 'right',
-          className: 'header-github-logo',
-          'aria-label': 'GitHub Repo',
-        },
+        // {
+        //   label: 'v1+',
+        //   position: 'right',
+        //   items: [
+        //     {
+        //       label: 'v0',
+        //       href: 'https://redocusaurus-v0.vercel.app/',
+        //     },
+        //     {
+        //       label: 'v1+',
+        //       href: 'https://redocusaurus.vercel.app',
+        //     },
+        //   ],
+        // },
+        // {
+        //   href: 'https://github.com/rohit-gohri/redocusaurus',
+        //   position: 'right',
+        //   className: 'header-github-logo',
+        //   'aria-label': 'GitHub Repo',
+        // },
       ],
     },
     footer: {
@@ -178,15 +210,15 @@ const config: Config = {
           items: [
             {
               label: 'Portal Example',
-              href: 'https://github.com/rohit-gohri/redocusaurus/',
+              href: '/docs/category/portal-example',
             },
             {
               label: 'Sonity Gateway',
-              href: 'https://rohit.page/blog/projects/openapi-for-docusaurus/',
+              href: '/docs/category/sonity-gateway',
             },
             {
               label: 'Selenium API',
-              href: 'https://twitter.com/rohit_gohri/status/1351589213565644801',
+              href: '/docs/category/selenium-api',
             },
           ],
         },
