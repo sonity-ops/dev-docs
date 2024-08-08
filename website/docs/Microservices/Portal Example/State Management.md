@@ -33,8 +33,6 @@ The Provider provides a value with the following
 - reducers - given the current state and an action, reducers are will return the final state
 
 
-For an example please checkout [this guide](./Guides/create-a-context)
-
 
 ## How to a Create a Context
 Lets say we wanted to create a `HomeProvider` we can take the following steps

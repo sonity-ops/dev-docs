@@ -43,11 +43,11 @@ Redocs supports the following tags
 
 `@returns` - Returns stuff
 
-`@param` {type} param_name  - Parameter tag
+`@param` \{type\} param_name  - Parameter tag
 
-`@prop` {type} prop_name - Component prop
+`@prop` \{type\} prop_name - Component prop
 
-`@property` {type} property_name - Class property
+`@property` \{type\} property_name - Class property
 
 `@example` - Example of usage
 
