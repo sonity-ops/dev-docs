@@ -101,6 +101,7 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
     // Redocusaurus Config
+    //@ts-ignore
     redocusaurus,
   ],
   themeConfig: {
