@@ -83,7 +83,7 @@ const config: Config = {
     },
   },
   url: process.env.DEPLOY_PRIME_URL || 'http://localhost:5000', // Your website URL
-  baseUrl: '/', // Base URL for your project */
+  baseUrl: '/dev-docs/', // Base URL for your project */
   organizationName: 'sonity-ops', // Usually your GitHub org/user name.
   projectName: 'dev-docs', // Usually your repo name.
   favicon: 'img/favicon.ico',
