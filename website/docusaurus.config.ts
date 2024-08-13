@@ -87,6 +87,7 @@ const config: Config = {
   organizationName: 'sonity-ops', // Usually your GitHub org/user name.
   projectName: 'dev-docs', // Usually your repo name.
   favicon: 'img/favicon.ico',
+  plugins: [require.resolve('docusaurus-lunr-search')],
   presets: [
     [
       '@docusaurus/preset-classic',
