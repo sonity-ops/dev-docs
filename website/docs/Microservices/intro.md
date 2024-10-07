@@ -10,3 +10,4 @@ Here is a list of the microservices
 | [Portal Example](./Portal%20Example/Intro)  | UI    |
 | [Sonity Gateway](./Sonity%20Gateway/intro) | Backend  |
 | [Selenium API](./Selenium%20API/intro) | Execute tasks on LinkedIn |
+| [Sonity MQ](./Sonity%20MQ/intro) | A queuing system build on BullMQ |
