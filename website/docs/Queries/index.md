@@ -878,3 +878,15 @@ limit 5
 select * from tcp_status_histories2 tsh
 where tsh.tracking_campaign_prospect_id in (617194)
 ```
+
+## Remove chat dupes entries w/ identical values (time, id)
+
+```sql
+DELETE FROM sonity_prod2.current_chats
+WHERE (time, id) IN (
+    SELECT time, id
+    FROM sonity_prod2.current_chats
+    GROUP BY time, id
+    HAVING COUNT(*) > 1
+);
+```
