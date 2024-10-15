@@ -741,5 +741,140 @@ and profile_name = 'Rebecca Schillemat'
 order by updated_at desc
 ```
 
+## Examine Events history by target ID
+
+```sql
+-- examing events history by target_l_id
+select 
+  * 
+from 
+  sonity_prod2.events e 
+where 
+  target_l_id = 'ACwAAAhr_18Bqq29FO2GEyRiF1pqTlYPBV_rVrU,xriB' -- 'ACwAAAcNlP8Bwu0va81vjP1Ihituw2_C_4oKnn4,58nW', nicole-mitrothanasis-cpa-17195773
+  and sonity_profile_id = 76 
+order by 
+  id desc 
+limit 
+  25
+```
+
+## Get profile chats
+
+```sql
+
+select * from sonity_prod2.tasks where task_status_id = 2
+and sonity_profile_id in (323)
+and payload->>'message_type' = 'send-msg'
+order by updated_at desc
+```
+
+## Get chats for a given thread
+
+```sql
+select * from sonity_prod2.current_chats where
+    sonity_profile_id = 323 and
+    sender ilike '%paul%' and thread_id = '2-OTVlNDcxNjAtZDA1OC00Y2Q2LTg0MjQtOTk2NjFmNGZmZTdiXzAxMA=='  --   , 2-YjZiZTFmOGMtOTQzYS00ZmJmLWI5MmQtNGRjYjhmYjQ2MTA5XzAxMA==
+order by updated_at desc
+```
 
 
+## Get messages for a given targett ID
+
+```sql
+SELECT * FROM sonity_prod2.tasks
+WHERE task_status_id = 2
+    AND sonity_profile_id = 78
+    AND campaign_definition_id IN (867)
+    AND target_l_id ILIKE 'andrewmitchell1'
+    AND (
+        payload->>'message_type' = 'Connection Message'
+        OR payload->>'message_type' = 'Message 1'
+        OR payload->>'message_type' = 'Welcome Message'
+        OR payload->>'message_type' = 'Message 1'
+        OR payload->>'message_type' = 'Message 2'
+    )
+    AND type = 'Control'
+    AND payload->>'message_type' = 'send-msg'
+ORDER BY updated_at DESC;
+```
+
+
+## Get profiles 
+
+```sql
+select sp.* from sonity_profiles sp
+left join sonity_preferences sp2 on sp2.sonity_profile_id = sp.id
+where sp2.id is null
+```
+
+```sql
+select sp2.* from sonity_profiles sp
+ inner join sonity_preferences sp2 on sp2.sonity_profile_id = sp.id
+where email ilike ('%pk%');
+```
+
+## L_ID duplicates
+
+```sql
+/* l_id dupes */
+
+    SELECT campaign_definition_id,
+    l_id, COUNT(*) AS ALIAS
+    FROM sonity_prod2.tracking_campaign_prospects
+    GROUP BY campaign_definition_id, l_id HAVING COUNT(*)>1;
+
+    /* salesnav_l_id dupes */
+
+    /* PROBLEM:  they can be null! */
+    SELECT campaign_definition_id,
+    sales_nav_l_id, COUNT(*) AS ALIASp
+    FROM sonity_prod2.tracking_campaign_prospects
+    GROUP BY campaign_definition_id, sales_nav_l_id HAVING COUNT(*)>1;
+```
+
+## Get Tasks by Message Type
+
+```sql
+select * from sonity_prod2.tasks
+ where type = 'Campaign' and payload->>'message_type' = 'Message 3'
+and sonity_profile_id = 304
+--and target_l_id = 'kenlawlis'
+order by updated_at desc
+ limit 6
+```
+
+## Get Completed Message Tasks
+
+```sql
+select * from sonity_prod2.tasks where task_status_id = 2
+ and sonity_profile_id in (249)
+and payload->>'message_type' = 'send-msg'
+order by updated_at desc
+```
+
+## Get control tasks
+
+```sql
+select * from sonity_prod2.tasks
+where type = 'Control' and payload->>'url' is not null and sonity_profile_id =  75  -- 76 --71 -- 35    -- 21 --75 --10 --78, 228
+--and campaign_definition_id in(1816) --2024-03-14 09:43:15.262579 +00:00
+order by updated_at desc
+limit 5
+```
+
+## Get Search and Collect Events
+
+```sql
+select * from sonity_prod2.events where type = 'search'
+and sonity_profile_email like '%alex%' --and campaign_definition_id in (1794)
+order by created_at desc
+limit 5
+```
+
+## Get History sequence
+
+```sql
+--history sequence
+select * from tcp_status_histories2 tsh
+where tsh.tracking_campaign_prospect_id in (617194)
+```
