@@ -9,22 +9,21 @@ sidebar_position: 1
 To install Sonity MQ clone it first
 
 ```sh
-git clone https://gitlab-temp.sonity.net/sonity-core-dev/sonity-mq
-```
+git clone https://gitlab-temp.sonity.net/nacmonad/sonity-webhooks
 
 
 ### Step 2: Install dependencies
 Install dependencies
 
 ```sh
-cd sonity-mq && yarn
+cd sonity-webhooks && yarn
 ```
 
 You can use npm
 
 
 ```sh
-cd sonity-mq && npm install
+cd sonity-webhooks && npm install
 ```
 
 
