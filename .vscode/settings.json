@@ -47,5 +47,8 @@
     "editor.codeActionsOnSave": {
       "source.fixAll": "explicit"
     }
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
   }
 }

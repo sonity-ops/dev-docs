@@ -8,18 +8,18 @@ info:
   description: |
     # Introduction
     This is an API documention of the Selenium API microservice.
-    
+
     The Selenium API micorservice is used to execute tasks on the LinkedIn platform by using the selenium library
-    
-    
+
+
     # Authentication
 
     You can authenticate to Selenium API via the following method:
       
     ### 1. API Key
-    
+
     When you login you will be given a toke, simply pass it to **Authorization** heaeder 
-    
+
     ```
     Athorization: eyJhbGciOiJIUz...UcclPUqvpZQ
     ```
@@ -34,18 +34,18 @@ paths:
       description: Creates and prepares  a driver for executing tasks
       operationId: startDriver
       responses:
-        '200':
+        "200":
           description: Driver was started successfully
-        '500':
+        "500":
           description: Failed. The server is not accessible
       requestBody:
-        $ref: '#/components/requestBodies/Profile'
+        $ref: "#/components/requestBodies/Profile"
   /enter-pin-code:
     post:
-      summary: Enter verification pin code 
+      summary: Enter verification pin code
       description: Enter verification pin code recieved either on your email, phone or verification app
       responses:
-        '200':
+        "200":
           description: Driver was started successfully
           content:
             application/json:
@@ -55,14 +55,36 @@ paths:
                   message:
                     type: string
                     example: "Driver updated successfully"
-        '500':
+        "500":
           description: Verification failed
       requestBody:
-        $ref: '#/components/requestBodies/Profile'
-  '/destroy/{sonity_profile_id}':
+        $ref: "#/components/requestBodies/Profile"
+  /update-sonity-preference:
+    post:
+      summary: Update sonity preferences
+      description: Update your sonity profile preferences
+      responses:
+        "200":
+          description: Driver was started successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Preferences"
+        "500":
+          description: Verification failed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sonity_profile_id:
+                  type: number
+
+  "/destroy/{sonity_profile_id}":
     post:
       summary: Destroy a driver
-      description: ''
+      description: ""
       parameters:
         - name: sonity_profile_id
           in: path
@@ -72,15 +94,15 @@ paths:
             type: integer
             format: int64
       responses:
-        '405':
+        "405":
           description: Invalid input
       requestBody:
-        $ref: '#/components/requestBodies/Profile'
-        
-  '/clear-tasks/{sonity_profile_id}':
+        $ref: "#/components/requestBodies/Profile"
+
+  "/clear-tasks/{sonity_profile_id}":
     get:
       summary: Clear driver tasks
-      description: ''
+      description: ""
       parameters:
         - name: sonity_profile_id
           in: path
@@ -90,16 +112,16 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DriverData'
-  '/refresh-tasks/{sonity_profile_id}':
+                $ref: "#/components/schemas/DriverData"
+  "/refresh-tasks/{sonity_profile_id}":
     get:
       summary: Refreshes tasks on the webdriver and forces start of Control tasks if exists
-      description: ''
+      description: ""
       parameters:
         - name: sonity_profile_id
           in: path
@@ -109,7 +131,7 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
@@ -124,12 +146,11 @@ paths:
                     type: string
                     description: "Message of the operation"
                     example: "Driver 213 was not found. So no tasks were refreshed"
-                  
-        
-  '/set-available/{sonity_profile_id}':
+
+  "/set-available/{sonity_profile_id}":
     post:
       summary: uploads an image
-      description: ''
+      description: ""
       parameters:
         - name: sonity_profile_id
           in: path
@@ -139,18 +160,18 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponse'
+                $ref: "#/components/schemas/ApiResponse"
       requestBody:
-        $ref: '#/components/requestBodies/Profile'
-  '/status/{sonity_profile_id}':
+        $ref: "#/components/requestBodies/Profile"
+  "/status/{sonity_profile_id}":
     get:
       summary: Get the status of a driver
-      description: ''
+      description: ""
       parameters:
         - name: sonity_profile_id
           in: path
@@ -160,17 +181,17 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DriverData'
-        
-  '/take-snapshot/{sonity_profile_id}':
+                $ref: "#/components/schemas/DriverData"
+
+  "/take-snapshot/{sonity_profile_id}":
     post:
       summary: uploads an image
-      description: ''
+      description: ""
       parameters:
         - name: sonity_profile_id
           in: path
@@ -180,7 +201,7 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successful operation
       requestBody:
         content:
@@ -188,43 +209,82 @@ paths:
             schema:
               type: object
               properties:
-                created_at: 
+                created_at:
                   type: string
-                  example: '2024-01-08T09:47:47.361Z'
-                img: 
+                  example: "2024-01-08T09:47:47.361Z"
+                img:
                   type: string
-                  example: 'iVBORw0KGgoAAAANSUhEUgAABDAAAAL'
+                  example: "iVBORw0KGgoAAAANSUhEUgAABDAAAAL"
                   description: "The image string"
   /statistics:
     get:
       summary: Get driver driver data
-      description: ''
+      description: ""
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DriverData'
+                $ref: "#/components/schemas/DriverData"
   /run-routine:
     post:
       summary: Test a driver routine on the fly
-      description: ''
+      description: ""
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DriverData'
-        '400':
+                $ref: "#/components/schemas/DriverData"
+        "400":
           description: Invalid username supplied
-        '404':
+        "404":
           description: User not found
       requestBody:
-        $ref: '#/components/requestBodies/RoutineData'
+        $ref: "#/components/requestBodies/RoutineData"
 components:
   schemas:
+    Preferences:
+      type: object
+      properties:
+        connMessages:
+          type: integer
+        maxMessages:
+          type: integer
+        otherMessages:
+          type: integer
+        inmailMessages:
+          type: integer
+        detailsScrapes:
+          type: integer
+        auto_launch:
+          type: boolean
+        work-on-monday:
+          type: boolean
+        work-on-tuesday:
+          type: boolean
+        work-on-wednesday:
+          type: boolean
+        work-on-thursday:
+          type: boolean
+        work-on-friday:
+          type: boolean
+        signInNotifications:
+          type: boolean
+        extractFirstNotifications:
+          type: boolean
+        syncThreadsNotifications:
+          type: boolean
+        driverErrorNotifications:
+          type: boolean
+        completedTasskNotifications:
+          type: boolean
+        taskErrorNotifications:
+          type: boolean
+        accept_after_no_invites:
+          type: integer
     User:
       type: object
       properties:
@@ -241,13 +301,13 @@ components:
           example: 60
           description: "The status identifier of the user."
         linkedinId:
-          type: string  # Replace with actual type if available
+          type: string # Replace with actual type if available
           description: "The LinkedIn ID of the user."
         githubId:
-          type: string  # Replace with actual type if available
+          type: string # Replace with actual type if available
           description: "The GitHub ID of the user."
         twitterId:
-          type: string  # Replace with actual type if available
+          type: string # Replace with actual type if available
           description: "The Twitter ID of the user."
         isVerified:
           type: boolean
@@ -281,14 +341,14 @@ components:
           example: "19"
           description: "The unique identifier for the user."
         type:
-          type: string  # Replace with actual type if available
+          type: string # Replace with actual type if available
           description: "The type of user."
         name:
           type: string
           example: "Bear Proxy"
           description: "The name of the user."
         description:
-          type: string  # Replace with actual type if available
+          type: string # Replace with actual type if available
           description: "The description of the user."
         host:
           type: string
@@ -326,7 +386,7 @@ components:
           type: string
         message:
           type: string
-   
+
     DriverData:
       type: object
       properties:
@@ -349,7 +409,7 @@ components:
           type: string
           description: "The profile name of the user."
         current_task:
-          type: object  # Replace with actual type if available
+          type: object # Replace with actual type if available
           description: "The current task of the user."
         tabs:
           type: array
@@ -371,8 +431,8 @@ components:
             type: string
             description: "List of blacklisted titles for the user."
         errorMsg:
-          type: object  # Replace with actual type if available
-          description: "Error message associated with the user."                        
+          type: object # Replace with actual type if available
+          description: "Error message associated with the user."
 
   requestBodies:
     RoutineData:
@@ -398,13 +458,13 @@ components:
                 items:
                   type: string
                 description: "List of paths to clear modules."
-                example: 
+                example:
                   - ../../routines/search/searchAndCollect.js
-                         
+
               routine_signature:
                 type: string
                 description: "The signature of the routine."
-                example:  "driver, payload"
+                example: "driver, payload"
               routine_is_async:
                 type: boolean
                 description: "Indicates whether the routine is asynchronous."
@@ -412,12 +472,12 @@ components:
               routine_args:
                 type: object
                 description: "Arguments for the routine."
-                example: 
+                example:
                   payload:
                     url: https://www.linkedin.com/search/results/people/?keywords=graphic%20desciner&origin=SWITCH_SEARCH_VERTICAL&sid=2KP
                     visitMax: 10
                     add_to_list: false
-     
+
             required:
               - secret
               - sonity_profile_id
@@ -430,20 +490,20 @@ components:
       content:
         application/json:
           schema:
-            type: 'object'
+            type: "object"
             properties:
-              email: 
+              email:
                 type: string
                 description: Profile email address
               password:
                 type: string
-                description: Profile password    
+                description: Profile password
               user:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
               proxies:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Proxy'
+                  $ref: "#/components/schemas/Proxy"
               sonity_account_id:
                 type: integer
                 description: Sonity account id
@@ -455,7 +515,7 @@ components:
                 description: Profile contact id
       description: Profile object
       required: true
-   
+
   securitySchemes:
     api_key:
       description: >
